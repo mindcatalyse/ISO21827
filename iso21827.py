@@ -3,7 +3,7 @@
 # API REST /iso21827    Auteur: Rioche Patrick                  le 23/11/2019
 #
 #   Cette API REST a ete concue dans un but pedagogique pour service de support a
-#   une formation MBA Expert en SI de la MySchoolDigital de l'ESPL à Angers.
+#   une formation MBA Expert en SI de la MySchoolDigital de l'ESPL Ã  Angers.
 #
 #   Les specifcations de l'API sont donnees par la norme iso21827 permettant de
 #   connaitre le niveau de maturite d'une entreprise a partir de 12 questions.
@@ -33,7 +33,7 @@
 from bottle import route,run,install
 from bottle_pgsql import PgSQLPlugin
 
-install(PgSQLPlugin('host=localhost port=5432 dbname=postgres user=postgres password=secret'))
+install(PgSQLPlugin('host=localhost port=5432 dbname=iso21827 user=postgres password=secret'))
 
 @route('/iso21827')
 def help():
@@ -117,7 +117,7 @@ def question(db,q1):
 @route('/iso21827/reponse/<q1>,<r1>')
 def reponse(db,q1,r1):
     #
-    #   Affiche la reponse correspond à la question
+    #   Affiche la reponse correspond Ã  la question
     #
     
     db.execute('select * from reponse where (idquestion=%s and idreponse=%s)', [q1, r1])
@@ -128,7 +128,7 @@ def reponse(db,q1,r1):
 @route('/iso21827/niveau/<n1>')
 def niveau(db,n1):
     #
-    #   Affiche le niveau correspond à la question
+    #   Affiche le niveau correspond Ã  la question
     #
     
     db.execute('select * from niveau where idniveau=%s', n1)
@@ -136,4 +136,4 @@ def niveau(db,n1):
     if row:
         return row
     
-run(host='0.0.0.0', port=80, debug=True)
+run(host='0.0.0.0', port=8080, debug=True)
